@@ -7,6 +7,7 @@ use App\Demanda;
 use App\Simulacion;
 use App\TablaSimulacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection as Collection;
 
 class SimulacionController extends Controller{
 
@@ -148,23 +149,27 @@ class SimulacionController extends Controller{
             }
         }
         return redirect()->route('tablaSimulacion');
-
     }
     public function tablaSimulacion(){
         $registros1 = TablaSimulacion::all()->toArray();
         TablaSimulacion::destroy($registros1);
         $simulacion=Simulacion::all()->last();
         $clientes=$simulacion->clientes;
-        $demanda=$clientes->count();
         foreach ($clientes as $cliente){
+            $servici=$cliente->servicio->all();
+            $servicio=new Collection();
+            foreach ($servici as $ser){
+                $servicio->push($ser['servicio'].'('.$ser['costo'].'$)');
+            }
+            $costoT=$cliente->servicio->sum('costo');
             TablaSimulacion::create([
                 'id'=>$cliente->id,
                 'numero_cliente'=>$cliente->numero_cliente,
                 'tipo_cliente'=>$cliente->tipo_cliente,
-                'servicios'=>$cliente->servicio->pluck('servicio')->implode(' - '),
+                'servicios'=>$servicio->implode(' - '),
                 'hospedado'=>$cliente->hospedado,
-                'pago'=>$cliente->hospedado?$cliente->pago:0,
-                'total_ganancia'=>$cliente->hospedado?TablaSimulacion::sum('pago')+$cliente->pago:TablaSimulacion::sum('pago'),
+                'pago'=>$cliente->hospedado?$costoT+$cliente->pago:0,
+                'total_ganancia'=>$cliente->hospedado?TablaSimulacion::sum('pago')+$costoT+$cliente->pago:TablaSimulacion::sum('pago'),
                 'simulacion_id'=>$simulacion->id
             ]);
         }

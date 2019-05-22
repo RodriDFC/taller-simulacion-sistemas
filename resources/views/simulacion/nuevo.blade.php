@@ -11,9 +11,9 @@
                         {!! csrf_field() !!}
                         <label for="habitacion">Agrege cantidad de cuartos maxima a construir para la simulacion</label>
                         <select class="form-control" id="habitacion" name="habitacion">
-                            <option value="25">25 habitaciones</option>
-                            <option value="50">50 habitaciones</option>
-                            <option value="75">75 habitaciones</option>
+                            <option value="4">4 habitaciones</option>
+                            <option value="8">8 habitaciones</option>
+                            <option value="12">12 habitaciones</option>
                         </select>
                         <div class="modal-footer">
                             <a href="#" data-dismiss="modal" class="btn btn-danger">Cerrar</a>
