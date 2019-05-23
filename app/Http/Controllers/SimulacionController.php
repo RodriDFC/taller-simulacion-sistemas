@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\ConstruirHabitacion;
 use App\Demanda;
 use App\Simulacion;
 use App\TablaSimulacion;
@@ -173,10 +174,12 @@ class SimulacionController extends Controller{
                 'simulacion_id'=>$simulacion->id
             ]);
         }
-        return redirect()->route('datosSimulacion');
+        //return redirect()->route('datosSimulacion');
+        return redirect()->route('construirHabitacion');
     }
     public function datosSimulacion(){
         $datos=TablaSimulacion::all();
-       return view('simulacion/simulacion',compact('datos'));
+        $habitacionConstruidas=ConstruirHabitacion::all()->last();
+       return view('simulacion/simulacion',compact('datos','habitacionConstruidas'));
     }
 }

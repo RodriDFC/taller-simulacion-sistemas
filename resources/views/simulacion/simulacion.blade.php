@@ -1,7 +1,40 @@
 @extends('layout')
 @section('contenido')
- <h1>Tabla de la simulacion</h1>
   @if($datos->isNotEmpty())
+
+   <div class="row">
+    <div class="col-6">
+     <h1>Tabla de la simulacion</h1>
+    </div>
+    <div class="col-auto offset-3">
+     <button type="button" class="btn btn-info mt-2" data-toggle="modal" data-target="#modal1">Habitaciones Construidas</button>
+     <div class="modal fade" id="modal1">
+      <div class="modal-dialog">
+       <div class="modal-content">
+        <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal"
+                 aria-label="close">&times;</button>
+        </div>
+        <div class="modal-body">
+         @if($habitacionConstruidas!=null)
+            <h5>las habitaciones que se recomienda construir:</h5>
+            <p>{{$habitacionConstruidas->cantidad_habitaciones_economica}} habitaciones de tipo Economica</p>
+            <p>{{$habitacionConstruidas->cantidad_habitaciones_negocios}} habitaciones de tipo Negocios</p>
+            <p>{{$habitacionConstruidas->cantidad_habitaciones_ejecutiva}} habitaciones de tipo Ejecutiva</p>
+            <p>{{$habitacionConstruidas->cantidad_habitaciones_premium}} habitaciones de tipo Premium</p>
+         @else
+            <h4>No se RECOMIENDA construir habitaciones porque la demanda es muy baja</h4>
+         @endif
+        </div>
+
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+
+
+
    <table class="table table-hover table-bordered text-center">
     <thead class="thead-dark">
     <tr>

@@ -21,7 +21,7 @@ Route::get('/tabla-simulacion','SimulacionController@tablaSimulacion')->name('ta
 Route::get('/datos-simulacion','SimulacionController@datosSimulacion')->name('datosSimulacion');
 //habitacion
 Route::post('/habitaciones','HabitacionController@guardar')->name('guardarHabitacion');
-
+Route::get('/construir_habitaciones','HabitacionController@construir')->name('construirHabitacion');
 //servicios
 Route::post('/definirServicios','ServiciosController@definirServicios')->name('guardarServicios');
 
