@@ -35,11 +35,11 @@ class HabitacionController extends Controller
         $demandaNegocios=$simulacion->clientes_simulados_negocios;
         $demandaEjecutiva=$simulacion->clientes_simulados_ejecutiva;
         $demandaPremium=$simulacion->clientes_simulados_premium;
-        $ec=$demandaEconomica-$economica;
-        $ne=$demandaNegocios-$negocios;
-        $ej=$demandaEjecutiva-$ejecutiva;
-        $pr=$demandaPremium-$premium;
-        if($ec>=0 || $ne>=0 || $ej>=0 || $pr>=0){
+        $ec=$economica/$demandaEconomica;
+        $ne=$negocios/$demandaNegocios;
+        $ej=$ejecutiva/$demandaEjecutiva;
+        $pr=$premium/$demandaPremium;
+        if($ec<=1.12 || $ne<=1.2 || $ej<=1.2 || $pr<=1.2){
             while ($habitacion!=0){
                 if($economica/$demandaEconomica<=1.12){
                     $construirEconomica++;
