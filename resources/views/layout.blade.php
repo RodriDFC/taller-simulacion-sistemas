@@ -24,7 +24,7 @@
                         </div>
                     </li>
                     <li class="navbar-item">
-                        <a class="nav-link btn-outline-primary" href="#">Reportes</a>
+                        <a class="nav-link btn-outline-primary" href="{{route('reportesGraficos')}}">Reportes graficos</a>
                     </li>
                     <li class="navbar-item">
                         <a class="nav-link btn-outline-primary" href="#">Ayuda</a>
@@ -45,5 +45,6 @@
     <script src={{asset('js/jquery-3.4.1.min.js')}}></script>
     <script src={{asset('js/bootstrap.min.js')}}></script>
     <script src={{asset('js/f.js')}}></script>
+    <script src={{asset("js/loader.js")}}></script>
 </body>
 </html>
