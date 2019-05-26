@@ -43,7 +43,7 @@ class HabitacionController extends Controller
         $pr=$premium/$demandaPremium;
         if($ec<=1.12 || $ne<=1.2 || $ej<=1.25 || $pr<=1.25){
             while ($habitacion!=0){
-                if($economica/$demandaEconomica<=1.16){
+                if($economica/$demandaEconomica<=1.12){
                     $construirEconomica++;
                     $economica++;
                     $habitacion--;
