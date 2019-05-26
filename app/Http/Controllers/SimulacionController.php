@@ -182,4 +182,87 @@ class SimulacionController extends Controller{
         $habitacionConstruidas=ConstruirHabitacion::all()->last();
        return view('simulacion/simulacion',compact('datos','habitacionConstruidas'));
     }
+
+    public function crearGraficos(){
+        //Count number of services
+        $datos = TablaSimulacion::all();
+        $countWifi = 0;
+        $countTVCable = 0;
+        $countLimpieza = 0;
+        $countBañoPrivado = 0;
+        $countSalaConferencias = 0;
+        $countCentroNegocios = 0;
+        $countRestaurant = 0;
+        $countAtencionPersonalizada = 0;
+        $countBalneario = 0;
+        $countGimnasio = 0;
+        $servicios;
+        
+        $countEconomico = 0;
+        $countEjecutivo = 0;
+        $countNegocios = 0;
+        $countPremium = 0;
+        $tipoHabitaciones;
+
+        foreach ($datos as $dato => $value) {
+            if ( strpos($value->servicios, "WiFi") !== false ) {
+                $countWifi++;
+                $servicios[0] = ['WiFi', $countWifi];
+            }
+            if ( strpos($value->servicios, "TV-cable") !== false ) {
+                $countTVCable++;
+                $servicios[1] = ['TV-cable', $countTVCable];
+            }
+            if ( strpos($value->servicios, "limpieza diaria") !== false ) {
+                $countLimpieza++;
+                $servicios[2] = ['Limpieza diaria', $countLimpieza];
+            }
+            if ( strpos($value->servicios, "Baño privado") !== false ) {
+                $countBañoPrivado++;
+                $servicios[3] = ['Baño privado', $countBañoPrivado];
+            }
+            if ( strpos($value->servicios, "Sala Conferencias") !== false ) {
+                $countSalaConferencias++;
+                $servicios[4] = ['Sala de conferencias', $countSalaConferencias];
+            }
+            if ( strpos($value->servicios, "Centro de negocios") !== false ) {
+                $countCentroNegocios++;
+                $servicios[5] = ['Centro de negocios', $countCentroNegocios];
+            }
+            if ( strpos($value->servicios, "Restaurant y Bar") !== false ) {
+                $countRestaurant++;
+                $servicios[6] = ['Restaurant y bar', $countRestaurant];
+            }
+            if ( strpos($value->servicios, "Atencion Personalizada") !== false ) {
+                $countAtencionPersonalizada++;
+                $servicios[7] = ['Atencion personalizada', $countAtencionPersonalizada];
+            }
+            if ( strpos($value->servicios, "Balneario") !== false ) {
+                $countBalneario++;
+                $servicios[8] = ['Balneario', $countBalneario];
+            }
+            if ( strpos($value->servicios, "Gimnasio") !== false ) {
+                $countGimnasio++;
+                $servicios[9] = ['Gimnasio', $countGimnasio];
+            }
+            if ($value->tipo_cliente == 'economica' ) {
+                $countEconomico++;
+                $tipoHabitaciones[0] = ['Economico', $countEconomico ,"red"];
+            }
+            if ($value->tipo_cliente == 'negocios' ) {
+                $countNegocios++;
+                $tipoHabitaciones[1] = ['Negocios', $countNegocios, "blue"];
+            }
+            if ($value->tipo_cliente == 'ejecutiva' ) {
+                $countEjecutivo++;
+                $tipoHabitaciones[2] = ['Ejecutiva', $countEjecutivo, "gold"];
+            }
+            if ($value->tipo_cliente == 'premium' ) {
+                $countPremium++;
+                $tipoHabitaciones[3] = ['Premium', $countPremium, "green"];
+            }
+        }
+        //dd($servicios);
+        return view('simulacion/graficos', compact('servicios'), compact('tipoHabitaciones'));
+    }
 }

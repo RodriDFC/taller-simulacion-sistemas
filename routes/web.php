@@ -27,3 +27,6 @@ Route::post('/definirServicios','ServiciosController@definirServicios')->name('g
 
 //temporada
 Route::post('/temporada','SimulacionController@definirTemporada')->name('definirTemporada');
+
+//Reportes con graficos de la simulacion
+Route::get('/reportesGraficos','SimulacionController@crearGraficos')->name('reportesGraficos');
