@@ -1,6 +1,6 @@
 @extends('layout')
 @section('contenido')
- <h1>Tabla de la simulacion</h1>
+ <h1>Reportes de la simulacion</h1>
   @if(!empty($servicios) && !empty($tipoHabitaciones))
   <html>
         <head>
@@ -65,10 +65,14 @@
         <body>
             <div id="piechart" style="width: 1000px; height: 700px;"></div>
             <div id="columnchart_values" style="width: 1000px; height: 600px;"></div>
+            <div class="row">
+                <div class="col">
+                    <a class="btn btn-info mb-3" href="{{route('datosSimulacion')}}">Tabla Simulacion</a>
+                </div>
+            </div>
         </body>
     </html>
   @else
-   <li>No hay usuarios</li>
+   <li>No inicio una simulacion</li>
   @endif
-
 @endsection

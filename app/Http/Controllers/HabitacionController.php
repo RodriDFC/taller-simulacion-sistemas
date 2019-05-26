@@ -7,6 +7,7 @@ use App\Habitacion;
 use App\Servicio;
 use App\Simulacion;
 use Illuminate\Http\Request;
+use App\TablaSimulacion;
 
 class HabitacionController extends Controller
 {
@@ -26,26 +27,27 @@ class HabitacionController extends Controller
         $construirEjecutiva=0;
         $construirPremium=0;
         $simulacion=Simulacion::all()->last();
+        $datos=TablaSimulacion::all();
         $habitacion=$simulacion->habitaciones_construir;
         $economica=Habitacion::where('tipo_habitacion','economica')->value('cantidad_habitaciones');
         $negocios=Habitacion::where('tipo_habitacion','negocios')->value('cantidad_habitaciones');
         $ejecutiva=Habitacion::where('tipo_habitacion','ejecutiva')->value('cantidad_habitaciones');
         $premium=Habitacion::where('tipo_habitacion','premium')->value('cantidad_habitaciones');
-        $demandaEconomica=$simulacion->clientes_simulados_economica;
-        $demandaNegocios=$simulacion->clientes_simulados_negocios;
-        $demandaEjecutiva=$simulacion->clientes_simulados_ejecutiva;
-        $demandaPremium=$simulacion->clientes_simulados_premium;
+        $demandaEconomica=$datos->where('tipo_cliente','economica')->count();
+        $demandaNegocios=$datos->where('tipo_cliente','negocios')->count();;
+        $demandaEjecutiva=$datos->where('tipo_cliente','ejecutiva')->count();;
+        $demandaPremium=$datos->where('tipo_cliente','premium')->count();;
         $ec=$economica/$demandaEconomica;
         $ne=$negocios/$demandaNegocios;
         $ej=$ejecutiva/$demandaEjecutiva;
         $pr=$premium/$demandaPremium;
-        if($ec<=1.12 || $ne<=1.2 || $ej<=1.2 || $pr<=1.2){
+        if($ec<=1.12 || $ne<=1.2 || $ej<=1.25 || $pr<=1.25){
             while ($habitacion!=0){
-                if($economica/$demandaEconomica<=1.12){
+                if($economica/$demandaEconomica<=1.16){
                     $construirEconomica++;
                     $economica++;
                     $habitacion--;
-                }elseif($premium/$demandaPremium<=1.2){
+                }elseif($premium/$demandaPremium<=1.25){
                     $construirPremium++;
                     $premium++;
                     $habitacion--;
@@ -53,7 +55,7 @@ class HabitacionController extends Controller
                     $construirNegocios++;
                     $negocios++;
                     $habitacion--;
-                }elseif($ejecutiva/$demandaEjecutiva<=1.2){
+                }elseif($ejecutiva/$demandaEjecutiva<=1.25){
                     $construirEjecutiva++;
                     $ejecutiva++;
                     $habitacion--;
