@@ -17,6 +17,7 @@ class CreateServiciosTable extends Migration
             $table->increments('id');
             $table->string('servicio');
             $table->integer('costo')->nullable();
+            $table->string('exigencia')->nullable();
             $table->timestamps();
         });
     }

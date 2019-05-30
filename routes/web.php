@@ -23,7 +23,13 @@ Route::get('/datos-simulacion','SimulacionController@datosSimulacion')->name('da
 Route::post('/habitaciones','HabitacionController@guardar')->name('guardarHabitacion');
 Route::get('/construir_habitaciones','HabitacionController@construir')->name('construirHabitacion');
 //servicios
+Route::get('/Servicios','ServiciosController@servicios')->name('servicios');
 Route::post('/definirServicios','ServiciosController@definirServicios')->name('guardarServicios');
+Route::get('/crearServicios','ServiciosController@crearServicios')->name('crearServicios');
+Route::post('/guardarServicios','ServiciosController@guardarServicios')->name('serviciosGuardar');
+Route::get('/editarServicios/{servicio}/editar','ServiciosController@editarServicios')->name('editarServicios');
+Route::put('/editarServicios/{servicio}','ServiciosController@actualizarServicios')->name('actualizarServicios');
+Route::delete('/servicios/{servicio}/eliminar','ServiciosController@eliminarServicio')->name('eliminarServicio');
 
 //temporada
 Route::post('/temporada','SimulacionController@definirTemporada')->name('definirTemporada');
