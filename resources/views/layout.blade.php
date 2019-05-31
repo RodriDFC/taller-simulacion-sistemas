@@ -26,7 +26,7 @@
                         <a class="nav-link dropdown-toggle btn-outline-primary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Edicion</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{route('servicios')}}">Servicios</a>
-                            <a class="dropdown-item" href="#">Habitaciones</a>
+                            <a class="dropdown-item" href="{{route('habitaciones')}}">Habitaciones</a>
                         </div>
                     </li>
                     <li class="navbar-item dropdown">
