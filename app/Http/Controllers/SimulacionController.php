@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Servicio;
 use App\ConstruirHabitacion;
 use App\Demanda;
 use App\Simulacion;
@@ -170,6 +171,7 @@ class SimulacionController extends Controller{
                 'servicios'=>$servicio->implode(' - '),
                 'hospedado'=>$cliente->hospedado,
                 'pago'=>$cliente->hospedado?$costoT+$cliente->pago:0,
+                'perdida'=>$cliente->hospedado?0:$costoT+$cliente->pago,
                 'total_ganancia'=>$cliente->hospedado?TablaSimulacion::sum('pago')+$costoT+$cliente->pago:TablaSimulacion::sum('pago'),
                 'simulacion_id'=>$simulacion->id
             ]);
@@ -186,6 +188,8 @@ class SimulacionController extends Controller{
     public function crearGraficos(){
         //Count number of services
         $datos = TablaSimulacion::all();
+        $datos1 = Servicio::all()->pluck('servicio');
+        dd($datos1);
         $countWifi = 0;
         $countTVCable = 0;
         $countLimpieza = 0;
@@ -205,6 +209,7 @@ class SimulacionController extends Controller{
         $tipoHabitaciones;
 
         foreach ($datos as $dato => $value) {
+
             if ( strpos($value->servicios, "WiFi") !== false ) {
                 $countWifi++;
                 $servicios[0] = ['WiFi', $countWifi];

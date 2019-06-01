@@ -46,5 +46,7 @@
     <script src={{asset('js/bootstrap.min.js')}}></script>
     <script src={{asset('js/f.js')}}></script>
     <script src={{asset("js/loader.js")}}></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 </body>
 </html>
