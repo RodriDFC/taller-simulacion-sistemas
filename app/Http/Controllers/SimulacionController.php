@@ -173,6 +173,7 @@ class SimulacionController extends Controller{
                 'pago'=>$cliente->hospedado?$costoT+$cliente->pago:0,
                 'perdida'=>$cliente->hospedado?0:$costoT+$cliente->pago,
                 'total_ganancia'=>$cliente->hospedado?TablaSimulacion::sum('pago')+$costoT+$cliente->pago:TablaSimulacion::sum('pago'),
+                'total_perdida'=>$cliente->hospedado?TablaSimulacion::sum('perdida'):TablaSimulacion::sum('perdida')+$costoT+$cliente->pago,
                 'simulacion_id'=>$simulacion->id
             ]);
         }
@@ -189,7 +190,7 @@ class SimulacionController extends Controller{
         //Count number of services
         $datos = TablaSimulacion::all();
         $datos1 = Servicio::all()->pluck('servicio');
-        dd($datos1);
+        //dd($datos1);
         $countWifi = 0;
         $countTVCable = 0;
         $countLimpieza = 0;

@@ -30,3 +30,4 @@ Route::post('/temporada','SimulacionController@definirTemporada')->name('definir
 
 //Reportes con graficos de la simulacion
 Route::get('/reportesGraficos','SimulacionController@crearGraficos')->name('reportesGraficos');
+Route::get('/reportesPerdidas','ClienteController@clientesNoHospedados')->name('reportesPerdidas');

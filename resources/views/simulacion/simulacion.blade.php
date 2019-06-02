@@ -6,11 +6,12 @@
     <div class="col-6">
      <h1>Tabla de la simulacion</h1>
     </div>
-    <div class="col-auto mt-2 offset-2">
-      <a class="btn btn-info" href="{{route('reportesGraficos')}}">Reporte Grafico</a>
+    <div class="btn-group">
+        <a type="button" class="btn btn-info mt-2" href="{{route('reportesGraficos')}}">Reporte Grafico</a>
+        <a type="button" class="btn btn-info mt-2" href="{{route('reportesPerdidas')}}">Reporte de perdidas</a>
+        <button type="button" class="btn btn-info mt-2" data-toggle="modal" data-target="#modal1">Habitaciones Construidas</button>
     </div>
     <div class="col-auto">
-     <button type="button" class="btn btn-info mt-2" data-toggle="modal" data-target="#modal1">Habitaciones Construidas</button>
      <div class="modal fade" id="modal1">
       <div class="modal-dialog">
        <div class="modal-content">
