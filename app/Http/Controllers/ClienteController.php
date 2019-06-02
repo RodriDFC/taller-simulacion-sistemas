@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\TablaSimulacion;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -81,5 +82,31 @@ class ClienteController extends Controller
     public function destroy(Cliente $cliente)
     {
         //
+    }
+
+    public function clientesNoHospedados()
+    {
+        $clientesPerdidos = TablaSimulacion::all();
+
+        //Obtener total ganacia y total perdida
+        $lastPerdidaTotal = $clientesPerdidos->last()->total_perdida;
+        $lastGananciaTotal = $clientesPerdidos->last()->total_ganancia;
+        $gananciaPerdida = [$lastGananciaTotal, $lastPerdidaTotal];
+        
+        //Numero de clientes hospedados y no hospedados
+        $hospedadosYnoHospedados;
+        $clientesHospedados = 0;
+        $clientesNoHospedados = 0;
+        
+        foreach ($clientesPerdidos as $clientesPerdido => $value) {
+            if ($value->hospedado == 1) {
+                $clientesHospedados++;
+            }else {
+                $clientesNoHospedados++;
+            }
+        }
+
+        $hospedadosYnoHospedados = [$clientesHospedados, $clientesNoHospedados];
+        return view('simulacion/graficosPerdidas', compact('clientesPerdidos','hospedadosYnoHospedados', 'gananciaPerdida'));
     }
 }

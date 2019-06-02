@@ -20,6 +20,8 @@ class TablaSimulacion extends Migration
             $table->string('servicios')->nullable();
             $table->boolean('hospedado')->nullable();
             $table->integer('pago')->nullable();
+            $table->integer('perdida')->nullable();
+            $table->integer('total_perdida')->nullable();
             $table->integer('total_ganancia')->nullable();
             $table->integer('simulacion_id')->unsigned()->index();
             $table->foreign('simulacion_id')->references('id')->on('simulacions')->onDelete('cascade');

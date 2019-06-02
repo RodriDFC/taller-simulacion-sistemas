@@ -37,7 +37,11 @@ Route::post('/temporada','SimulacionController@definirTemporada')->name('definir
 //Reportes con graficos de la simulacion
 Route::get('/reportesGraficos','SimulacionController@crearGraficos')->name('reportesGraficos');
 
+Route::get('/reportesPerdidas','ClienteController@clientesNoHospedados')->name('reportesPerdidas');
+
+
 //habitaciones
 Route::get('/habitaciones','HabitacionController@habitaciones')->name('habitaciones');
 Route::get('/editarHabitaciones/{habitacion}/editar','habitacionController@editarHabitacion')->name('editarHabitacion');
 Route::put('/editarHabitacion/{habitacion}','HabitacionController@actualizarHabitacion')->name('actualizarHabitacion');
+
