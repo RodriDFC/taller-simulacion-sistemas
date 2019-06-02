@@ -22,6 +22,7 @@ Route::get('/datos-simulacion','SimulacionController@datosSimulacion')->name('da
 //habitacion
 Route::post('/habitaciones','HabitacionController@guardar')->name('guardarHabitacion');
 Route::get('/construir_habitaciones','HabitacionController@construir')->name('construirHabitacion');
+Route::get('/habitaciones_ocupadas','ClienteController@habitacionesOcupadas')->name('habitacionesOcupadas');
 //servicios
 Route::get('/Servicios','ServiciosController@servicios')->name('servicios');
 Route::post('/definirServicios','ServiciosController@definirServicios')->name('guardarServicios');

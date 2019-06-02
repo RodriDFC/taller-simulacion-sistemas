@@ -9,7 +9,15 @@
     <div class="btn-group">
         <a type="button" class="btn btn-info mt-2" href="{{route('reportesGraficos')}}">Reporte Grafico</a>
         <a type="button" class="btn btn-info mt-2" href="{{route('reportesPerdidas')}}">Reporte de perdidas</a>
-        <button type="button" class="btn btn-info mt-2" data-toggle="modal" data-target="#modal1">Habitaciones Construidas</button>
+        <div class="dropdown mt-2 btn-info"  >
+            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Analisis de Habitaciones
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button type="button" class="btn dropdown-item" data-toggle="modal" data-target="#modal1">Habitaciones Construidas</button>
+                <a class="dropdown-item" href="{{route('habitacionesOcupadas')}}">Habitaciones Ocupadas</a>
+            </div>
+        </div>
     </div>
     <div class="col-auto">
      <div class="modal fade" id="modal1">
@@ -64,7 +72,7 @@
     </tbody>
    </table>
   @else
-   <li>No hay usuarios</li>
+   <li>No Realizo una Simulacion</li>
   @endif
 
 @endsection

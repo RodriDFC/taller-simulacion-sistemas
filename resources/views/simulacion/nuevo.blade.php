@@ -9,7 +9,7 @@
                 <div class="modal-body">
                     <form method="POST" action="{{route('guardarHabitacion')}}">
                         {!! csrf_field() !!}
-                        <label for="lapso_simulacion">Cantidad de Habitaciones</label>
+                        <label for="lapso_simulacion">Lapso de tiempo de la simulacion</label>
                         <select class="form-control" id="lapso_simulacion" name="lapso_simulacion">
                             <option value="1">Mensual</option>
                             <option value="1.5">Bimestral</option>

@@ -44,21 +44,21 @@ class HabitacionController extends Controller
         $pr=$premium/$demandaPremium;
         if($ec<=1 || $ne<=1 || $ej<=1 || $pr<=1){
             while ($habitacion!=0){
-                if($economica/$demandaEconomica<=1.12){
-                    $construirEconomica++;
-                    $economica++;
-                    $habitacion--;
-                }elseif($premium/$demandaPremium<=1.25){
+                if($premium/$demandaPremium <= 1){
                     $construirPremium++;
                     $premium++;
                     $habitacion--;
-                }elseif($negocios/$demandaNegocios<=1.2){
+                }elseif($ejecutiva/$demandaEjecutiva <= 1){
+                    $construirEjecutiva++;
+                    $ejecutiva++;
+                    $habitacion--;
+                }elseif($negocios/$demandaNegocios <= 1){
                     $construirNegocios++;
                     $negocios++;
                     $habitacion--;
-                }elseif($ejecutiva/$demandaEjecutiva<=1.25){
-                    $construirEjecutiva++;
-                    $ejecutiva++;
+                }elseif($economica/$demandaEconomica <= 1){
+                    $construirEconomica++;
+                    $economica++;
                     $habitacion--;
                 }else{
                     $habitacion--;
