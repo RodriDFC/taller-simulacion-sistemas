@@ -20,11 +20,21 @@
                         <a class="nav-link dropdown-toggle btn-outline-primary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Archivo</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{route('nuevaSimulacion')}}">Nueva Simulacion</a>
-                            <a class="dropdown-item" href="#">Guardar</a>
                         </div>
                     </li>
-                    <li class="navbar-item">
-                        <a class="nav-link btn-outline-primary" href="{{route('reportesGraficos')}}">Reportes graficos</a>
+                    <li class="navbar-item dropdown">
+                        <a class="nav-link dropdown-toggle btn-outline-primary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Edicion</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{route('servicios')}}">Servicios</a>
+                            <a class="dropdown-item" href="{{route('habitaciones')}}">Habitaciones</a>
+                        </div>
+                    </li>
+                    <li class="navbar-item dropdown">
+                        <a class="nav-link dropdown-toggle btn-outline-primary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reportes</a>
+                        <div class="dropdown-menu">
+                            <a class="nav-link btn-outline-primary" href="{{route('reportesGraficos')}}">Reportes graficos</a>
+                            <a class="dropdown-item" href="#">Clientes no hopedados</a>
+                        </div>
                     </li>
                     <li class="navbar-item">
                         <a class="nav-link btn-outline-primary" href="#">Ayuda</a>

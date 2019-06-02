@@ -15,10 +15,8 @@ class Cliente extends Model
     }
     public static function simularClientes(int $i){
         $simulacion=Simulacion::all()->last();
-        $servicios=Servicio::where('servicio','WiFi')
-            ->orWhere('servicio','TV-cable')
-            ->orWhere('servicio','limpieza diaria')
-            ->pluck('id')->toArray();
+        $servicios=Servicio::where('exigencia','economica')->pluck('id')->toArray();
+        $cantidadServicios=count($servicios);
         $ser=$servicios;
         //for ($i=1;$i<=$clientesEconomica;$i++){
             $aleatorio=(rand(0,100))/100;
@@ -27,11 +25,11 @@ class Cliente extends Model
             }else{
                 $hospedado=false;
             }
-            $aleatorio1=rand(1,3);
+            $aleatorio1=rand(1,$cantidadServicios);
             $j=0;
             $servicios=array();
             while ($j<=$aleatorio1){
-                $aleatorio2=rand(0,2);
+                $aleatorio2=rand(0,$cantidadServicios-1);
                 $servicio=$ser[$aleatorio2];
                 $servicios=array_add($servicios,$j,$servicio);
                 $j++;
@@ -52,12 +50,10 @@ class Cliente extends Model
     }
     public static function simularClientesNegocios(int $i){
         $simulacion=Simulacion::all()->last();
-        $servicios=Servicio::where('servicio','WiFi')
-            ->orWhere('servicio','TV-cable')
-            ->orWhere('servicio','limpieza diaria')
-            ->orWhere('servicio','Baño privado')
-            ->orWhere('servicio','Sala Conferencias')
+        $servicios=Servicio::where('exigencia','economica')
+            ->orWhere('exigencia','negocios')
             ->pluck('id')->toArray();
+        $cantidadServicios=count($servicios);
         $ser=$servicios;
         //for ($i=1;$i<=$clientesEconomica;$i++){
         $aleatorio=(rand(0,100))/100;
@@ -66,11 +62,11 @@ class Cliente extends Model
         }else{
             $hospedado=false;
         }
-        $aleatorio1=rand(1,5);
+        $aleatorio1=rand(1,$cantidadServicios);
         $j=0;
         $servicios=array();
         while ($j<=$aleatorio1){
-            $aleatorio2=rand(0,4);
+            $aleatorio2=rand(0,$cantidadServicios-1);
             $servicio=$ser[$aleatorio2];
             $servicios=array_add($servicios,$j,$servicio);
             $j++;
@@ -92,15 +88,11 @@ class Cliente extends Model
 
     public static function simularClientesEjecutiva(int $i){
         $simulacion=Simulacion::all()->last();
-        $servicios=Servicio::where('servicio','WiFi')
-            ->orWhere('servicio','TV-cable')
-            ->orWhere('servicio','limpieza diaria')
-            ->orWhere('servicio','Baño privado')
-            ->orWhere('servicio','Sala Conferencias')
-            ->orWhere('servicio','Centro de negocios')
-            ->orWhere('servicio','Restaurant y Bar')
-            ->orWhere('servicio','Atencion Personalizada')
+        $servicios=Servicio::where('exigencia','economica')
+            ->orWhere('exigencia','negocios')
+            ->orWhere('exigencia','ejecutiva')
             ->pluck('id')->toArray();
+        $cantidadServicios=count($servicios);
         $ser=$servicios;
         //for ($i=1;$i<=$clientesEconomica;$i++){
         $aleatorio=(rand(0,100))/100;
@@ -109,11 +101,11 @@ class Cliente extends Model
         }else{
             $hospedado=false;
         }
-        $aleatorio1=rand(1,8);
+        $aleatorio1=rand(1,$cantidadServicios);
         $j=0;
         $servicios=array();
         while ($j<=$aleatorio1){
-            $aleatorio2=rand(0,7);
+            $aleatorio2=rand(0,$cantidadServicios-1);
             $servicio=$ser[$aleatorio2];
             $servicios=array_add($servicios,$j,$servicio);
             $j++;
@@ -135,17 +127,12 @@ class Cliente extends Model
 
     public static function simularClientesPremium(int $i){
         $simulacion=Simulacion::all()->last();
-        $servicios=Servicio::where('servicio','WiFi')
-            ->orWhere('servicio','TV-cable')
-            ->orWhere('servicio','limpieza diaria')
-            ->orWhere('servicio','Baño privado')
-            ->orWhere('servicio','Sala Conferencias')
-            ->orWhere('servicio','Centro de negocios')
-            ->orWhere('servicio','Restaurant y Bar')
-            ->orWhere('servicio','Atencion Personalizada')
-            ->orWhere('servicio','Balneario')
-            ->orWhere('servicio','Gimnasio')
+        $servicios=Servicio::where('exigencia','economica')
+            ->orWhere('exigencia','negocios')
+            ->orWhere('exigencia','ejecutiva')
+            ->orWhere('exigencia','premium')
             ->pluck('id')->toArray();
+        $cantidadServicios=count($servicios);
         $ser=$servicios;
         //for ($i=1;$i<=$clientesEconomica;$i++){
         $aleatorio=(rand(0,100))/100;
@@ -154,11 +141,11 @@ class Cliente extends Model
         }else{
             $hospedado=false;
         }
-        $aleatorio1=rand(1,10);
+        $aleatorio1=rand(1,$cantidadServicios);
         $j=0;
         $servicios=array();
         while ($j<=$aleatorio1){
-            $aleatorio2=rand(0,9);
+            $aleatorio2=rand(0,$cantidadServicios-1);
             $servicio=$ser[$aleatorio2];
             $servicios=array_add($servicios,$j,$servicio);
             $j++;

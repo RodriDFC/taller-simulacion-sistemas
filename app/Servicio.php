@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Servicio extends Model
 {
     protected $fillable = [
-        'servicio'
+        'servicio','exigencia','costo'
     ];
     public function clientes(){
         return $this->belongsToMany(Servicio::class);

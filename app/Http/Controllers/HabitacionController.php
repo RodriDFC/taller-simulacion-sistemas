@@ -15,6 +15,7 @@ class HabitacionController extends Controller
         $simulacion=Simulacion::all()->last();
         $simulacion->update([
             'habitaciones_construir'=>$request['habitacion'],
+            'lapso_simulacion'=>$request['lapso_simulacion']
         ]);
         $servicios=Servicio::all()->pluck('id')->toArray();
         $idSim=$simulacion->value('id');
@@ -41,7 +42,7 @@ class HabitacionController extends Controller
         $ne=$negocios/$demandaNegocios;
         $ej=$ejecutiva/$demandaEjecutiva;
         $pr=$premium/$demandaPremium;
-        if($ec<=1.12 || $ne<=1.2 || $ej<=1.25 || $pr<=1.25){
+        if($ec<=1 || $ne<=1 || $ej<=1 || $pr<=1){
             while ($habitacion!=0){
                 if($economica/$demandaEconomica<=1.12){
                     $construirEconomica++;
@@ -75,5 +76,22 @@ class HabitacionController extends Controller
             return redirect()->route('datosSimulacion');
         }
     }
-
+    public function habitaciones(){
+        $habitaciones=Habitacion::all();
+        return view('habitacion/habitaciones',compact('habitaciones'));
+    }
+    public function editarHabitacion(Habitacion $habitacion){
+        return view('habitacion/editarHabitaciones',compact('habitacion'));
+    }
+    public function actualizarHabitacion(Request $request,Habitacion $habitacion){
+        $this->validate($request,[
+            'cantidad_habitaciones'=>['required','numeric'],
+            'tipo_habitacion'=>'',
+        ],[
+            'cantidad_habitaciones.required'=>'el campo "cantidad habitaciones" es requerido',
+            'cantidad_habitaciones.numeric'=>'el campo "cantidad habitaciones" debe ser un numero'
+        ]);
+        $habitacion->update($request->all());
+        return redirect()->route('habitaciones');
+    }
 }
