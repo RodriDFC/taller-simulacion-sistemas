@@ -2,7 +2,7 @@
 @section('contenido')
     <div class="row justify-content-center mt-3">
         <div class="col-6">
-            <h3>Editar Servicio: {{$habitacion->tipo_habitacion}}</h3>
+            <h3>Editar cantidad de habitaciones: {{$habitacion->tipo_habitacion}}</h3>
         </div>
     </div>
     <div class="row justify-content-center">
