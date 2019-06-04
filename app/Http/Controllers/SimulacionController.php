@@ -192,7 +192,21 @@ class SimulacionController extends Controller{
         //Count number of services
         $datos = TablaSimulacion::all();
         $datos1 = Servicio::all()->pluck('servicio');
-        //dd($datos1);
+        $servicios;
+        $indice = 0;
+
+        foreach ($datos1 as $dato1) {
+            $count = 0;
+            foreach ($datos as $dato) {
+                
+                if (strpos($dato->servicios, $dato1) !== false ) {
+                    $count++;
+                }
+            }
+            $servicios[$indice] = [$dato1, $count];
+            $indice++;
+        }
+        
         $countWifi = 0;
         $countTVCable = 0;
         $countLimpieza = 0;
@@ -203,7 +217,7 @@ class SimulacionController extends Controller{
         $countAtencionPersonalizada = 0;
         $countBalneario = 0;
         $countGimnasio = 0;
-        $servicios;
+        //$servicios;
         
         $countEconomico = 0;
         $countEjecutivo = 0;
@@ -213,7 +227,7 @@ class SimulacionController extends Controller{
 
         foreach ($datos as $dato => $value) {
 
-            if ( strpos($value->servicios, "WiFi") !== false ) {
+            /*if ( strpos($value->servicios, "WiFi") !== false ) {
                 $countWifi++;
                 $servicios[0] = ['WiFi', $countWifi];
             }
@@ -252,7 +266,7 @@ class SimulacionController extends Controller{
             if ( strpos($value->servicios, "Gimnasio") !== false ) {
                 $countGimnasio++;
                 $servicios[9] = ['Gimnasio', $countGimnasio];
-            }
+            }*/
             if ($value->tipo_cliente == 'economica' ) {
                 $countEconomico++;
                 $tipoHabitaciones[0] = ['Economico', $countEconomico ,"red"];
