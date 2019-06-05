@@ -17,7 +17,7 @@ class CreateSimulacionsTable extends Migration
             $table->increments('id');
             $table->String('temporada')->nullable();
             $table->integer('habitaciones_construir')->nullable();
-            $table->integer('lapso_simulacion')->nullable();
+            $table->float('lapso_simulacion')->nullable();
             $table->integer('clientes_simulados_economica')->nullable();
             $table->integer('clientes_simulados_negocios')->nullable();
             $table->integer('clientes_simulados_ejecutiva')->nullable();

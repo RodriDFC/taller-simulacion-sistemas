@@ -38,25 +38,25 @@ class HabitacionController extends Controller
         $demandaNegocios=$datos->where('tipo_cliente','negocios')->count();;
         $demandaEjecutiva=$datos->where('tipo_cliente','ejecutiva')->count();;
         $demandaPremium=$datos->where('tipo_cliente','premium')->count();;
-        $ec=$economica/$demandaEconomica;
-        $ne=$negocios/$demandaNegocios;
-        $ej=$ejecutiva/$demandaEjecutiva;
-        $pr=$premium/$demandaPremium;
-        if($ec<=1 || $ne<=1 || $ej<=1 || $pr<=1){
+        $ec=$economica-$demandaEconomica;
+        $ne=$negocios-$demandaNegocios;
+        $ej=$ejecutiva-$demandaEjecutiva;
+        $pr=$premium-$demandaPremium;
+        if($ec<0 || $ne<0 || $ej<0 || $pr<0){
             while ($habitacion!=0){
-                if($premium/$demandaPremium <= 1){
+                if($premium-$demandaPremium < 0){
                     $construirPremium++;
                     $premium++;
                     $habitacion--;
-                }elseif($ejecutiva/$demandaEjecutiva <= 1){
+                }elseif($ejecutiva-$demandaEjecutiva < 0){
                     $construirEjecutiva++;
                     $ejecutiva++;
                     $habitacion--;
-                }elseif($negocios/$demandaNegocios <= 1){
+                }elseif($negocios-$demandaNegocios < 0){
                     $construirNegocios++;
                     $negocios++;
                     $habitacion--;
-                }elseif($economica/$demandaEconomica <= 1){
+                }elseif($economica-$demandaEconomica < 0){
                     $construirEconomica++;
                     $economica++;
                     $habitacion--;
@@ -73,6 +73,13 @@ class HabitacionController extends Controller
             ]);
             return redirect()->route('datosSimulacion');
         }else{
+            ConstruirHabitacion::create([
+                'cantidad_habitaciones_economica'=>$construirEconomica,
+                'cantidad_habitaciones_negocios'=>$construirNegocios,
+                'cantidad_habitaciones_ejecutiva'=>$construirEjecutiva,
+                'cantidad_habitaciones_premium'=>$construirPremium,
+                'simulacion_id'=>$simulacion->id
+            ]);
             return redirect()->route('datosSimulacion');
         }
     }

@@ -11,10 +11,13 @@
                         {!! csrf_field() !!}
                         <label for="lapso_simulacion">Lapso de tiempo de la simulacion</label>
                         <select class="form-control" id="lapso_simulacion" name="lapso_simulacion">
+                            <option value="0.4">Diario</option>
+                            <option value="0.6">Semanal</option>
                             <option value="1">Mensual</option>
                             <option value="1.5">Bimestral</option>
                             <option value="2">Trimestral</option>
                             <option value="3">Semestral</option>
+                            <option value="6">Anual</option>
                         </select>
                         <label for="habitacion">Agrege cantidad de cuartos maxima a construir para la simulacion</label>
                         <input type="number" class="form-control" id="habitacion" name="habitacion" required>
