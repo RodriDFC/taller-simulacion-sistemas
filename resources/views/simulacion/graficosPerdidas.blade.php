@@ -1,6 +1,6 @@
 @extends('layout')
 @section('contenido')
-    @if(!empty($clientesPerdidos)&&!empty($hospedadosYnoHospedados))
+    @if(!empty($clientesPerdidos)&&!empty($clientesHospedadosPorServicio))
     <div class="container-fluid">
         <h1>Reportes de perdidas</h1>
         <div class="row">
@@ -41,12 +41,15 @@
                     
                     var data = google.visualization.arrayToDataTable([
                     ['Tipo clientes', 'Numero'],
-                    ['Clientes que se hospedaron',     {{$hospedadosYnoHospedados[0]}}],
-                    ['Clientes que no se hospedaron',     {{$hospedadosYnoHospedados[1]}}]
+                    ['Habitacion economica ', {{$clientesHospedadosPorServicio[0]}}],
+                    ['Habitacion de negocios', {{$clientesHospedadosPorServicio[1]}}],
+                    ['Habitacion ejecutiva', {{$clientesHospedadosPorServicio[2]}}],
+                    ['Habitacion premium', {{$clientesHospedadosPorServicio[3]}}],
+                    ['Clientes que no se hospedaron', {{$clientesHospedadosPorServicio[4]}}],
                     ]);
         
                     var options = {
-                    title: 'Porcentajes clientes de que se hospedaron y no se hospedaron',
+                    title: 'Porcentajes clientes hospedados por tipo de habitacion y no hospedados',
                     is3D: true,
                     };
         
@@ -64,8 +67,12 @@
                     //var color = ["red", "gold", "green", "blue"];
                     var data = google.visualization.arrayToDataTable([
                         ["Estados", "Cantidad", { role: "style" } ],
-                        ['Total ganacias',  {{$gananciaPerdida[0]}}, 'green'],
-                        ['Total perdidas',  {{$gananciaPerdida[1]}}, 'red']
+                        ['Ganancias por habitacion economica',  {{$gananciasYPerdidas[0]}}, 'green'],
+                        ['Ganancias por habitacion de negocios',  {{$gananciasYPerdidas[1]}}, 'blue'],
+                        ['Ganancias por habitacion ejecutiva',  {{$gananciasYPerdidas[2]}}, 'orange'],
+                        ['Ganancias por habitacion Premium',  {{$gananciasYPerdidas[3]}}, 'purple'],
+                        ['Total ganacias',  {{$gananciasYPerdidas[4]}}, 'gold'],
+                        ['Total perdidas',  {{$gananciasYPerdidas[5]}}, 'red'],
                     ]);
 
                     var view = new google.visualization.DataView(data);
@@ -77,7 +84,7 @@
                                     2]);
 
                     var options = {
-                        title: "Comparación ganancias perdidas",
+                        title: "Comparación ganancias por tipo de habitacion y perdidas",
                         bar: {groupWidth: "95%"},
                         legend: { position: "none" },
                         is3D: true,
@@ -89,7 +96,7 @@
             </script>
             <div class="col-sm-8">
                 <div id="piechart1" style="width: 900px; height: 500px;"></div>
-                <div id="columnchart_values1" style="width: 900px; height: 500px;"></div>
+                <div id="columnchart_values1" style="width: 1000px; height: 700px;"></div>
             </div>
         </div>
     </div>
