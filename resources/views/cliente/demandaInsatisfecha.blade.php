@@ -1,6 +1,13 @@
 @extends('layout')
 @section('contenido')
-    <h2>Demanda Insatisfecha por falta de habitaciones</h2>
+    <div class="row">
+        <div class="col-10 mt-1">
+            <h2>Demanda Insatisfecha por falta de habitaciones</h2>
+        </div>
+        <div class="col-auto mt-2">
+            <a class="btn btn-info" href="{{route('reporteDemandaInsatisfechaPDF')}}">Reporte PDF</a>
+        </div>
+    </div>
     <hr>
     @if($demandaInsatisfechaEconomica>0)
         <h6>demanda insatisfecha Economica: {{$demandaInsatisfechaEconomica}}</h6>

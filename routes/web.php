@@ -46,3 +46,5 @@ Route::get('/habitaciones','HabitacionController@habitaciones')->name('habitacio
 Route::get('/editarHabitaciones/{habitacion}/editar','habitacionController@editarHabitacion')->name('editarHabitacion');
 Route::put('/editarHabitacion/{habitacion}','HabitacionController@actualizarHabitacion')->name('actualizarHabitacion');
 
+//repotes PDF
+Route::get('/demanda-insatisfecha-PDF','DemandaController@reporteDemandaInsatisfechaPDF')->name('reporteDemandaInsatisfechaPDF');
