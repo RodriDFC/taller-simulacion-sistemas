@@ -11,8 +11,8 @@
                         {!! csrf_field() !!}
                         <label for="temporada">Seleccione la temporada</label>
                         <select class="form-control" id="temporada" name="temporada">
-                            <option value="alta">temporada Alta</option>
-                            <option value="baja">temporada Baja</option>
+                            <option value="alta">temporada Alta (Oct, Nov, Dic, Ene, Feb, Mar)</option>
+                            <option value="baja">temporada Baja (Abr, May, Jun, Jul, Ago, Sep)</option>
                         </select>
                         <div class="modal-footer">
                             <a href="#" data-dismiss="modal" class="btn btn-danger">Cerrar</a>
