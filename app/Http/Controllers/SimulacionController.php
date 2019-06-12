@@ -139,7 +139,8 @@ class SimulacionController extends Controller{
         $demandaPremium=$simulacion->clientes_simulados_premium;
         $demandaTotal=$demandaEconomica+$demandaNegocios+$demandaEjecutiva+$demandaPremium;
         $periodo=$simulacion->lapso_simulacion;
-        $demandaTotal=$demandaTotal*$periodo;
+        $cantidad_tiempo=$simulacion->cantidad_tiempo;
+        $demandaTotal=$demandaTotal*$periodo*$cantidad_tiempo;
         for ($i=1;$i<=$demandaTotal;$i++){
             $aleatorio=(rand(0, 1000)) / 1000;
             if($aleatorio<=0.1485){

@@ -51,6 +51,12 @@ class DemandaController extends Controller
             'demandaInsatisfechaNegocios','demandaInsatisfechaEjecutiva','demandaInsatisfechaPremium'));
         return  $pdf->download('Demanda_insatisfecha_por_falta_de_habitaciones.pdf');
     }
+    public function tablaPDF(){
+        $datos=TablaSimulacion::all();
+        $pdf=PDF::loadView('simulacion/tablaPdf',compact('datos'));
+        return  $pdf->stream();
+
+    }
 
 
 

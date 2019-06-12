@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Simulacion extends Model
 {
     protected $fillable = [
-        'habitaciones_construir','temporada','clientes_simulados_economica','clientes_simulados_negocios','clientes_simulados_ejecutiva','clientes_simulados_premium','lapso_simulacion'
+        'habitaciones_construir','temporada','clientes_simulados_economica','clientes_simulados_negocios','clientes_simulados_ejecutiva','clientes_simulados_premium','lapso_simulacion','cantidad_tiempo'
     ];
     public function servicios(){
         return $this->belongsToMany(Servicio::class);

@@ -15,7 +15,8 @@ class HabitacionController extends Controller
         $simulacion=Simulacion::all()->last();
         $simulacion->update([
             'habitaciones_construir'=>$request['habitacion'],
-            'lapso_simulacion'=>$request['lapso_simulacion']
+            'lapso_simulacion'=>$request['lapso_simulacion'],
+            'cantidad_tiempo'=>$request['cantidad_tiempo']
         ]);
         $servicios=Servicio::all()->pluck('id')->toArray();
         $idSim=$simulacion->value('id');

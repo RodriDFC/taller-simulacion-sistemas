@@ -7,8 +7,17 @@
      <h1>Tabla de la simulacion</h1>
     </div>
     <div class="btn-group">
-        <a type="button" class="btn btn-info mt-2" href="{{route('reportesGraficos')}}">Reporte Grafico</a>
-        <a type="button" class="btn btn-info mt-2" href="{{route('reportesPerdidas')}}">Reporte de perdidas</a>
+        <a href="{{route('reporteServicios')}}" class="btn btn-info mt-2">Servicios</a>
+        <div class="dropdown mt-2 btn-info"  >
+            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Reportes Simulacion
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{{route('reportesGraficos')}}">Reporte Grafico</a>
+                <a class="dropdown-item" href="{{route('tablaPDF')}}">Reporte PDF</a>
+                <a class="dropdown-item" href="{{route('reportesPerdidas')}}">Reporte de perdidas</a>
+            </div>
+        </div>
         <div class="dropdown mt-2 btn-info"  >
             <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Analisis de Habitaciones

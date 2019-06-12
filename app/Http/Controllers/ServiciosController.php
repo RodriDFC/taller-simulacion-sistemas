@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Servicio;
 use App\Simulacion;
+use App\TablaSimulacion;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class ServiciosController extends Controller
@@ -61,5 +63,44 @@ class ServiciosController extends Controller
     public function eliminarServicio(Servicio $servicio){
         $servicio->delete();
         return redirect()->route('servicios');
+    }
+    public function reporteServicios(){
+        $datos=TablaSimulacion::all();
+        $serv = Servicio::all();
+        $servicios=[];
+        $gananciaServicio=0;
+        $indice = 0;
+        foreach ($serv as $ser) {
+            $count = 0;
+            foreach ($datos as $dato) {
+                if (strpos($dato->servicios,$ser->servicio) !== false ) {
+                    $count++;
+                }
+            }
+            $gananciaServicio=$count*$ser->costo;
+            $servicios[$indice] = [$ser->servicio,$count,$ser->costo,$gananciaServicio];
+            $indice++;
+        }
+        return view('servicio/reporteServicio',compact('servicios'));
+    }
+    public function reporteServiciosPDF(){
+        $datos=TablaSimulacion::all();
+        $serv = Servicio::all();
+        $servicios=[];
+        $gananciaServicio=0;
+        $indice = 0;
+        foreach ($serv as $ser) {
+            $count = 0;
+            foreach ($datos as $dato) {
+                if (strpos($dato->servicios,$ser->servicio) !== false ) {
+                    $count++;
+                }
+            }
+            $gananciaServicio=$count*$ser->costo;
+            $servicios[$indice] = [$ser->servicio,$count,$ser->costo,$gananciaServicio];
+            $indice++;
+        }
+        $pdf=PDF::loadView('servicio/reporteServicioPdf',compact('servicios'));
+        return  $pdf->stream();
     }
 }

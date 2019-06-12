@@ -32,9 +32,11 @@
                     <li class="navbar-item dropdown">
                         <a class="nav-link dropdown-toggle btn-outline-primary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reportes</a>
                         <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{route('tablaPDF')}}">Tabla Simulacion en PDF</a>
                             <a class="dropdown-item" href="{{route('reportesGraficos')}}">Reportes graficos</a>
                             <a class="dropdown-item" href="{{route('reportesPerdidas')}}">Clientes no hopedados</a>
                             <a class="dropdown-item" href="{{route('habitacionesOcupadas')}}">Habitaciones Ocupadas</a>
+                            <a class="dropdown-item" href="{{route('reporteServicios')}}">Reporte de los Servicios</a>
                         </div>
                     </li>
                     <li class="navbar-item">

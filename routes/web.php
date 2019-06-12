@@ -48,3 +48,6 @@ Route::put('/editarHabitacion/{habitacion}','HabitacionController@actualizarHabi
 
 //repotes PDF
 Route::get('/demanda-insatisfecha-PDF','DemandaController@reporteDemandaInsatisfechaPDF')->name('reporteDemandaInsatisfechaPDF');
+Route::get('/tabla-simulacion-pdf','DemandaController@tablaPDF')->name('tablaPDF');
+Route::get('/reporte-servicios','ServiciosController@reporteServicios')->name('reporteServicios');
+Route::get('/reporte-servicios-pdf','ServiciosController@reporteServiciosPDF')->name('reporteServiciosPdf');
