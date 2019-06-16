@@ -40,7 +40,7 @@
                         </div>
                     </li>
                     <li class="navbar-item">
-                        <a class="nav-link btn-outline-primary" href="#">Ayuda</a>
+                        <a class="nav-link btn-outline-primary" href="{{route('ayuda')}}">Ayuda</a>
                     </li>
                 </ul>
             </nav>

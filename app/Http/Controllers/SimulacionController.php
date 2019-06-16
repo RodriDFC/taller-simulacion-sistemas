@@ -288,4 +288,7 @@ class SimulacionController extends Controller{
         //dd($servicios);
         return view('simulacion/graficos', compact('servicios'), compact('tipoHabitaciones'));
     }
+    public function ayuda(){
+        return view('ayuda/ayuda');
+    }
 }

@@ -95,9 +95,11 @@ class HabitacionController extends Controller
         $this->validate($request,[
             'cantidad_habitaciones'=>['required','numeric'],
             'tipo_habitacion'=>'',
+            'precio_habitacion'=> ['required','digits_between:1,1000']
         ],[
             'cantidad_habitaciones.required'=>'el campo "cantidad habitaciones" es requerido',
-            'cantidad_habitaciones.numeric'=>'el campo "cantidad habitaciones" debe ser un numero'
+            'cantidad_habitaciones.numeric'=>'el campo "cantidad habitaciones" debe ser un numero',
+            'precio_habitacion.digits_between'=>'el campo "precio habitacion" debe estar entre 1 y 1000'
         ]);
         $habitacion->update($request->all());
         return redirect()->route('habitaciones');

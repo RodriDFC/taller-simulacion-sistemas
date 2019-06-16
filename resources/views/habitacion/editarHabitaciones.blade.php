@@ -19,6 +19,11 @@
                     <label for="tipo_habitacion">Tipo de Servicio</label>
                     <input id="tipo_habitacion" type="text" name="tipo_habitacion" class="form-control" value="{{old('tipo_habitacion',$habitacion->tipo_habitacion)}}" disabled>
                 </div>
+                <div class="form-group">
+                    <label for="precio_habitacion">Precio de la habitacion</label>
+                    <input id="precio_habitacion" type="number" name="precio_habitacion" class="form-control" value="{{old('precio_habitacion',$habitacion->precio_habitacion)}}">
+                    <span class="text-danger">{{ $errors->first('precio_habitacion') }}</span>
+                </div>
                 <div class="form-group row justify-content-end">
                     <a href="{{route('habitaciones')}}" class="btn btn-danger mr-3">Cancelar</a>
                     <button type="submit" class="btn btn-primary mr-3">Editar</button>

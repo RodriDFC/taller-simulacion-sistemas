@@ -20,10 +20,10 @@ class ClienteController extends Controller
         $clientesNegocios=TablaSimulacion::where('tipo_cliente','negocios')->get();
         $clientesEjecutiva=TablaSimulacion::where('tipo_cliente','ejecutiva')->get();
         $clientesPremium=TablaSimulacion::where('tipo_cliente','premium')->get();
-        $habitacionesEconomica=Habitacion::where('tipo_habitacion','economica')->first()->value('cantidad_habitaciones');
-        $habitacionesNegocios=Habitacion::where('tipo_habitacion','negocios')->first()->value('cantidad_habitaciones');
-        $habitacionesEjecutiva=Habitacion::where('tipo_habitacion','ejecutiva')->first()->value('cantidad_habitaciones');
-        $habitacionesPremium=Habitacion::where('tipo_habitacion','premium')->first()->value('cantidad_habitaciones');
+        $habitacionesEconomica=Habitacion::where('tipo_habitacion','economica')->value('cantidad_habitaciones');
+        $habitacionesNegocios=Habitacion::where('tipo_habitacion','negocios')->value('cantidad_habitaciones');
+        $habitacionesEjecutiva=Habitacion::where('tipo_habitacion','ejecutiva')->value('cantidad_habitaciones');
+        $habitacionesPremium=Habitacion::where('tipo_habitacion','premium')->value('cantidad_habitaciones');
         $habitacionesConstruidas=ConstruirHabitacion::all()->first();
         $habitacionesEconomicaConstruidas=$habitacionesConstruidas->cantidad_habitaciones_economica;
         $habitacionesNegociosConstruidas=$habitacionesConstruidas->cantidad_habitaciones_negocios;

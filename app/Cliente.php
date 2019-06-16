@@ -35,12 +35,13 @@ class Cliente extends Model
                 $j++;
             }
             $servicios=array_unique($servicios);
+            $pagoHabitacionEconomica=Habitacion::where('tipo_habitacion','economica')->value('precio_habitacion');
             $clienteSim=Cliente::create([
                 'id'=>$i,
                 'numero_cliente'=>$i,
                 'hospedado'=>$hospedado,
                 'tipo_cliente'=>'economica',
-                'pago'=>78,
+                'pago'=>$pagoHabitacionEconomica,
                 'simulacion_id'=>$simulacion->id
             ]);
             $idSim=$clienteSim->id;
@@ -72,12 +73,13 @@ class Cliente extends Model
             $j++;
         }
         $servicios=array_unique($servicios);
+        $pagoHabitacionNegocios=Habitacion::where('tipo_habitacion','negocios')->value('precio_habitacion');
         $clienteSim=Cliente::create([
             'id'=>$i,
             'numero_cliente'=>$i,
             'hospedado'=>$hospedado,
             'tipo_cliente'=>'negocios',
-            'pago'=>97,
+            'pago'=>$pagoHabitacionNegocios,
             'simulacion_id'=>$simulacion->id
         ]);
         $idSim=$clienteSim->id;
@@ -111,12 +113,13 @@ class Cliente extends Model
             $j++;
         }
         $servicios=array_unique($servicios);
+        $pagoHabitacion=Habitacion::where('tipo_habitacion','ejecutiva')->value('precio_habitacion');
         $clienteSim=Cliente::create([
             'id'=>$i,
             'numero_cliente'=>$i,
             'hospedado'=>$hospedado,
             'tipo_cliente'=>'ejecutiva',
-            'pago'=>120,
+            'pago'=>$pagoHabitacion,
             'simulacion_id'=>$simulacion->id
         ]);
         $idSim=$clienteSim->id;
@@ -151,12 +154,13 @@ class Cliente extends Model
             $j++;
         }
         $servicios=array_unique($servicios);
+        $pagoHabitacion=Habitacion::where('tipo_habitacion','premium')->value('precio_habitacion');
         $clienteSim=Cliente::create([
             'id'=>$i,
             'numero_cliente'=>$i,
             'hospedado'=>$hospedado,
             'tipo_cliente'=>'premium',
-            'pago'=>180,
+            'pago'=>$pagoHabitacion,
             'simulacion_id'=>$simulacion->id
         ]);
         $idSim=$clienteSim->id;

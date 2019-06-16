@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Habitacion extends Model
 {
     protected $fillable = [
-        'cantidad_habitaciones','id','tipo_habitacion',
+        'cantidad_habitaciones','id','tipo_habitacion','precio_habitacion'
     ];
 }

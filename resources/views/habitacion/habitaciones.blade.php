@@ -12,6 +12,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Cantidad de habitaciones</th>
                 <th scope="col">Tipo de habitacion</th>
+                <th scope="col">Precio de la Habitacion</th>
                 <th scope="col">Acciones</th>
             </tr>
             </thead>
@@ -21,6 +22,7 @@
                     <th scope="row">{{$habitacion->id}}</th>
                     <td>{{$habitacion->cantidad_habitaciones}}</td>
                     <td>{{$habitacion->tipo_habitacion}}</td>
+                    <td>{{$habitacion->precio_habitacion}}</td>
                     <td>
                         <a class="btn btn-info" href="{{route('editarHabitacion',$habitacion)}}">Editar</a>
                     </td>
