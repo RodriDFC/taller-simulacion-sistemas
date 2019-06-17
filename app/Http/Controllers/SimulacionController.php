@@ -8,6 +8,7 @@ use App\ConstruirHabitacion;
 use App\Demanda;
 use App\Simulacion;
 use App\TablaSimulacion;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection as Collection;
 
@@ -316,6 +317,67 @@ class SimulacionController extends Controller{
         //dd($servicios);
         return view('simulacion/graficos', compact('servicios'), compact('tipoHabitaciones'));
     }
+
+    public function reporteGraficosPdf(Request $request){
+        //Count number of services
+        $datos = TablaSimulacion::all();
+        $datos1 = Servicio::all()->pluck('servicio');
+        $servicios;
+        $indice = 0;
+
+        foreach ($datos1 as $dato1) {
+            $count = 0;
+            foreach ($datos as $dato) {
+                
+                if (strpos($dato->servicios, $dato1) !== false ) {
+                    $count++;
+                }
+            }
+            $servicios[$indice] = [$dato1, $count];
+            $indice++;
+        }
+        
+        $countWifi = 0;
+        $countTVCable = 0;
+        $countLimpieza = 0;
+        $countBañoPrivado = 0;
+        $countSalaConferencias = 0;
+        $countCentroNegocios = 0;
+        $countRestaurant = 0;
+        $countAtencionPersonalizada = 0;
+        $countBalneario = 0;
+        $countGimnasio = 0;
+        //$servicios;
+        
+        $countEconomico = 0;
+        $countEjecutivo = 0;
+        $countNegocios = 0;
+        $countPremium = 0;
+        $tipoHabitaciones;
+
+        foreach ($datos as $dato => $value) {
+
+            if ($value->tipo_cliente == 'economica' ) {
+                $countEconomico++;
+                $tipoHabitaciones[0] = ['Economico', $countEconomico ,"red"];
+            }
+            if ($value->tipo_cliente == 'negocios' ) {
+                $countNegocios++;
+                $tipoHabitaciones[1] = ['Negocios', $countNegocios, "blue"];
+            }
+            if ($value->tipo_cliente == 'ejecutiva' ) {
+                $countEjecutivo++;
+                $tipoHabitaciones[2] = ['Ejecutiva', $countEjecutivo, "gold"];
+            }
+            if ($value->tipo_cliente == 'premium' ) {
+                $countPremium++;
+                $tipoHabitaciones[3] = ['Premium', $countPremium, "green"];
+            }
+        }
+        //dd($servicios);
+        $pdf = PDF::loadView('simulacion/graficos', compact('servicios', 'tipoHabitaciones'));
+        return $pdf->stream();
+
     /* en este metodo se generan la ayuda del sistema**/
     public function ayuda(){
         return view('ayuda/ayuda');

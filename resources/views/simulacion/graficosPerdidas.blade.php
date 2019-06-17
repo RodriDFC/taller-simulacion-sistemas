@@ -3,6 +3,9 @@
     @if(!empty($clientesPerdidos)&&!empty($clientesHospedadosPorServicio))
     <div class="container-fluid">
         <h1>Reportes de perdidas</h1>
+        <div class="col">
+            <a class="btn btn-outline-info" href="{{route('reportesPerdidasPdf')}}">Guardar como PDF</a>
+        </div>
         <div class="row">
             <div class="col-sm-4">
                 <table class="table table-hover table-bordered text-center">

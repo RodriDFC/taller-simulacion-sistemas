@@ -39,6 +39,8 @@ Route::post('/temporada','SimulacionController@definirTemporada')->name('definir
 Route::get('/reportesGraficos','SimulacionController@crearGraficos')->name('reportesGraficos');
 
 Route::get('/reportesPerdidas','ClienteController@clientesNoHospedados')->name('reportesPerdidas');
+Route::get('/reportesPerdidasPdf','ClienteController@reportesPerdidasPdf')->name('reportesPerdidasPdf');
+Route::get('/reportesGananciasPorHabitacion','DemandaController@reportesGananciasPorHabitacion')->name('reportesGananciasPorHabitacion');
 
 
 //habitaciones
@@ -52,5 +54,9 @@ Route::get('/tabla-simulacion-pdf','DemandaController@tablaPDF')->name('tablaPDF
 Route::get('/reporte-servicios','ServiciosController@reporteServicios')->name('reporteServicios');
 Route::get('/reporte-servicios-pdf','ServiciosController@reporteServiciosPDF')->name('reporteServiciosPdf');
 
+Route::get('/reporteGraficosPdf','SimulacionController@reporteGraficosPdf')->name('reporteGraficosPdf');
+
+
 //ayuda
 Route::get('/ayuda','SimulacionController@ayuda')->name('ayuda');
+

@@ -6,6 +6,7 @@ use App\Cliente;
 use App\ConstruirHabitacion;
 use App\Habitacion;
 use App\TablaSimulacion;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -118,5 +119,74 @@ class ClienteController extends Controller
 
         $clientesHospedadosPorServicio = [$countEconomico, $countNegocios, $countEjecutivo, $countPremium, $clientesNoHospedados];
         return view('simulacion/graficosPerdidas', compact('clientesHospedadosPorServicio','clientesPerdidos','gananciasYPerdidas'));
+    }
+
+    public function reportesPerdidasPdf(Type $var = null)
+    {
+        $clientesPerdidos = TablaSimulacion::all();
+
+        //Obtener total ganacia y total perdida
+        $lastPerdidaTotal = $clientesPerdidos->last()->total_perdida;
+
+        $gananciaEconomica = 0;
+        $gananciaNegocios = 0;
+        $gananciaEjecutiva = 0;
+        $gananciaPremium = 0;
+
+        foreach ($clientesPerdidos as $clientesPerdido => $value) {
+            
+            if ($value->tipo_cliente == 'economica') {
+                $gananciaEconomica = $gananciaEconomica + $value->pago;
+            }
+            if ($value->tipo_cliente == 'negocios') {
+                $gananciaNegocios = $gananciaNegocios + $value->pago;
+            }
+            if ($value->tipo_cliente == 'ejecutiva') {
+                $gananciaEjecutiva = $gananciaEjecutiva + $value->pago;
+            }
+            if ($value->tipo_cliente == 'premium') {
+                $gananciaPremium = $gananciaPremium + $value->pago;
+            }
+        }
+
+        $lastGananciaTotal = $clientesPerdidos->last()->total_ganancia;
+        $gananciasYPerdidas = [$gananciaEconomica, $gananciaNegocios, $gananciaEjecutiva, $gananciaPremium, $lastGananciaTotal, $lastPerdidaTotal];
+        
+        //Numero de clientes hospedados y no hospedados
+        $clientesHospedadosPorServicio;
+        //$clientesHospedados = 0;
+        $clientesNoHospedados = 0;
+
+        $countEconomico = 0;
+        $countEjecutivo = 0;
+        $countNegocios = 0;
+        $countPremium = 0;
+        $tipoHabitaciones;
+        
+        foreach ($clientesPerdidos as $clientesPerdido => $value) {
+
+            if ($value->hospedado == 1) {
+
+                if ($value->tipo_cliente == 'economica') {
+                    $countEconomico++;
+                }
+                if ($value->tipo_cliente == 'negocios') {
+                    $countNegocios++;
+                }
+                if ($value->tipo_cliente == 'ejecutiva') {
+                    $countEjecutivo++;
+                }
+                if ($value->tipo_cliente == 'premium') {
+                    $countPremium++;
+                }
+                //$clientesHospedados++;
+            }else {
+                $clientesNoHospedados++;
+            }
+        }
+        $clientesHospedadosPorServicio = [$countEconomico, $countNegocios, $countEjecutivo, $countPremium, $clientesNoHospedados];
+        
+        $pdf = PDF::loadView('simulacion/graficosPerdidasPdf', compact('clientesHospedadosPorServicio','clientesPerdidos','gananciasYPerdidas'));
+        return $pdf->stream();
     }
 }
