@@ -13,6 +13,9 @@ class Cliente extends Model
     public function servicio(){
         return $this->belongsToMany(Servicio::class);
     }
+    /* en este metodo se simula un cliente de tipo economica, genera un numero aleatorio para ver si
+        el cliente se va o se queda y otro numero aleatorio para ver que servicios va a pedir
+     **/
     public static function simularClientes(int $i){
         $simulacion=Simulacion::all()->last();
         $servicios=Servicio::where('exigencia','economica')->pluck('id')->toArray();
@@ -35,12 +38,13 @@ class Cliente extends Model
                 $j++;
             }
             $servicios=array_unique($servicios);
+            $pagoHabitacionEconomica=Habitacion::where('tipo_habitacion','economica')->value('precio_habitacion');
             $clienteSim=Cliente::create([
                 'id'=>$i,
                 'numero_cliente'=>$i,
                 'hospedado'=>$hospedado,
                 'tipo_cliente'=>'economica',
-                'pago'=>78,
+                'pago'=>$pagoHabitacionEconomica,
                 'simulacion_id'=>$simulacion->id
             ]);
             $idSim=$clienteSim->id;
@@ -48,6 +52,9 @@ class Cliente extends Model
             $servicios=$ser;
         //}
     }
+    /* en este metodo se simula un cliente de tipo negocios, genera un numero aleatorio para ver si
+        el cliente se va o se queda y otro numero aleatorio para ver que servicios va a pedir
+     **/
     public static function simularClientesNegocios(int $i){
         $simulacion=Simulacion::all()->last();
         $servicios=Servicio::where('exigencia','economica')
@@ -72,12 +79,13 @@ class Cliente extends Model
             $j++;
         }
         $servicios=array_unique($servicios);
+        $pagoHabitacionNegocios=Habitacion::where('tipo_habitacion','negocios')->value('precio_habitacion');
         $clienteSim=Cliente::create([
             'id'=>$i,
             'numero_cliente'=>$i,
             'hospedado'=>$hospedado,
             'tipo_cliente'=>'negocios',
-            'pago'=>97,
+            'pago'=>$pagoHabitacionNegocios,
             'simulacion_id'=>$simulacion->id
         ]);
         $idSim=$clienteSim->id;
@@ -85,7 +93,9 @@ class Cliente extends Model
         $servicios=$ser;
         //}
     }
-
+    /* en este metodo se simula un cliente de tipo ejecutiva, genera un numero aleatorio para ver si
+            el cliente se va o se queda y otro numero aleatorio para ver que servicios va a pedir
+         **/
     public static function simularClientesEjecutiva(int $i){
         $simulacion=Simulacion::all()->last();
         $servicios=Servicio::where('exigencia','economica')
@@ -111,12 +121,13 @@ class Cliente extends Model
             $j++;
         }
         $servicios=array_unique($servicios);
+        $pagoHabitacion=Habitacion::where('tipo_habitacion','ejecutiva')->value('precio_habitacion');
         $clienteSim=Cliente::create([
             'id'=>$i,
             'numero_cliente'=>$i,
             'hospedado'=>$hospedado,
             'tipo_cliente'=>'ejecutiva',
-            'pago'=>120,
+            'pago'=>$pagoHabitacion,
             'simulacion_id'=>$simulacion->id
         ]);
         $idSim=$clienteSim->id;
@@ -125,6 +136,9 @@ class Cliente extends Model
         //}
     }
 
+    /* en este metodo se simula un cliente de tipo premium, genera un numero aleatorio para ver si
+            el cliente se va o se queda y otro numero aleatorio para ver que servicios va a pedir
+         **/
     public static function simularClientesPremium(int $i){
         $simulacion=Simulacion::all()->last();
         $servicios=Servicio::where('exigencia','economica')
@@ -151,12 +165,13 @@ class Cliente extends Model
             $j++;
         }
         $servicios=array_unique($servicios);
+        $pagoHabitacion=Habitacion::where('tipo_habitacion','premium')->value('precio_habitacion');
         $clienteSim=Cliente::create([
             'id'=>$i,
             'numero_cliente'=>$i,
             'hospedado'=>$hospedado,
             'tipo_cliente'=>'premium',
-            'pago'=>180,
+            'pago'=>$pagoHabitacion,
             'simulacion_id'=>$simulacion->id
         ]);
         $idSim=$clienteSim->id;

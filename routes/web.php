@@ -53,4 +53,10 @@ Route::get('/demanda-insatisfecha-PDF','DemandaController@reporteDemandaInsatisf
 Route::get('/tabla-simulacion-pdf','DemandaController@tablaPDF')->name('tablaPDF');
 Route::get('/reporte-servicios','ServiciosController@reporteServicios')->name('reporteServicios');
 Route::get('/reporte-servicios-pdf','ServiciosController@reporteServiciosPDF')->name('reporteServiciosPdf');
+
 Route::get('/reporteGraficosPdf','SimulacionController@reporteGraficosPdf')->name('reporteGraficosPdf');
+
+
+//ayuda
+Route::get('/ayuda','SimulacionController@ayuda')->name('ayuda');
+

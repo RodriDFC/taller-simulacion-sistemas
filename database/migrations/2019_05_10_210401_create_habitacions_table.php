@@ -17,6 +17,7 @@ class CreateHabitacionsTable extends Migration
             $table->increments('id');
             $table->integer('cantidad_habitaciones');
             $table->string('tipo_habitacion')->nullable();
+            $table->integer('precio_habitacion');
             $table->timestamps();
         });
     }

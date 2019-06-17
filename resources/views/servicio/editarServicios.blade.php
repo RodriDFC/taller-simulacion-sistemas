@@ -16,7 +16,7 @@
                     <span class="alert-danger">{{ $errors->first('servicio') }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="costo">Costo del Servicio</label>
+                    <label for="costo">Precio del Servicio</label>
                     <input id="costo" type="number" name="costo" class="form-control" value="{{old('costo',$servicio->costo)}}">
                     <span class="alert-danger">{{ $errors->first('costo') }}</span>
                 </div>

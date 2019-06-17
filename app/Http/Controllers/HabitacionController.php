@@ -11,6 +11,8 @@ use App\TablaSimulacion;
 
 class HabitacionController extends Controller
 {
+    /* en este metodo se guardan los datos lapso de tiempo, habitaciones a construir
+        y cantidad de tiempo y retorna a la vista donde se selecciona la temporada    **/
     public function guardar(Request $request){
         $simulacion=Simulacion::all()->last();
         $simulacion->update([
@@ -23,6 +25,11 @@ class HabitacionController extends Controller
         $simulacion->servicios()->attach($servicios,['simulacion_id'=>$idSim]);
         return view('temporada/definirTemporada');
     }
+    /* en este metodo se construyen la habitaciones comparando los clientes simulados
+     con el numero de habitaciones disponibles, priorizando a los clientes que generan mas ganancias
+        (premium, ejecutiva, negocios,economica)
+     y  redircciona al metodo que muestra la tabla de la simulacion
+     **/
     public function construir(){
         $construirEconomica=0;
         $construirNegocios=0;
@@ -84,20 +91,28 @@ class HabitacionController extends Controller
             return redirect()->route('datosSimulacion');
         }
     }
+    /* en este metodo se genera la lista de habitaciones del hotel
+     **/
     public function habitaciones(){
         $habitaciones=Habitacion::all();
         return view('habitacion/habitaciones',compact('habitaciones'));
     }
+    /* en este metodo se genera la vista para editar las habitaciones del hotel
+     **/
     public function editarHabitacion(Habitacion $habitacion){
         return view('habitacion/editarHabitaciones',compact('habitacion'));
     }
+    /* en este metodo se actualiza la habitacion a editar
+     **/
     public function actualizarHabitacion(Request $request,Habitacion $habitacion){
         $this->validate($request,[
             'cantidad_habitaciones'=>['required','numeric'],
             'tipo_habitacion'=>'',
+            'precio_habitacion'=> ['required','digits_between:1,1000']
         ],[
             'cantidad_habitaciones.required'=>'el campo "cantidad habitaciones" es requerido',
-            'cantidad_habitaciones.numeric'=>'el campo "cantidad habitaciones" debe ser un numero'
+            'cantidad_habitaciones.numeric'=>'el campo "cantidad habitaciones" debe ser un numero',
+            'precio_habitacion.digits_between'=>'el campo "precio habitacion" debe estar entre 1 y 1000'
         ]);
         $habitacion->update($request->all());
         return redirect()->route('habitaciones');
