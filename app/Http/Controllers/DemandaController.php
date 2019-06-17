@@ -11,6 +11,8 @@ use App\TablaSimulacion;
 
 class DemandaController extends Controller
 {
+    /* en este metodo se generan el reporte de demanda insatisfecha en pdf
+    **/
     public function reporteDemandaInsatisfechaPDF()
     {
         $clientesEconomica=TablaSimulacion::where('tipo_cliente','economica')->get();
@@ -51,6 +53,8 @@ class DemandaController extends Controller
             'demandaInsatisfechaNegocios','demandaInsatisfechaEjecutiva','demandaInsatisfechaPremium'));
         return  $pdf->download('Demanda_insatisfecha_por_falta_de_habitaciones.pdf');
     }
+    /* en este metodo se generan el reporte de la tabla de simulacion en pdf
+    **/
     public function tablaPDF(){
         $datos=TablaSimulacion::all();
         $pdf=PDF::loadView('simulacion/tablaPdf',compact('datos'));

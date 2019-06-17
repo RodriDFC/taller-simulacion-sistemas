@@ -10,11 +10,8 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /* en este metodo se generan el reporte de demanda insatisfecha
+    **/
     public function habitacionesOcupadas(){
         $clientesEconomica=TablaSimulacion::where('tipo_cliente','economica')->get();
         $clientesNegocios=TablaSimulacion::where('tipo_cliente','negocios')->get();
@@ -53,7 +50,8 @@ class ClienteController extends Controller
             'clientesNegocios','clientesEjecutiva','clientesPremium','demandaInsatisfechaEconomica',
             'demandaInsatisfechaNegocios','demandaInsatisfechaEjecutiva','demandaInsatisfechaPremium'));
     }
-
+    /* en este metodo se generan el reporte de perdidas porque clientes no hospedados
+        **/
     public function clientesNoHospedados()
     {
         $clientesPerdidos = TablaSimulacion::all();

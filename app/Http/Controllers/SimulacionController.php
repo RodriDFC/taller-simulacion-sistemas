@@ -13,6 +13,10 @@ use Illuminate\Support\Collection as Collection;
 
 class SimulacionController extends Controller{
 
+    /* en este metodo se crea la simulacion,
+        se eliminan los datos de anteriores simulaciones
+        y retorna a la vista donde se selecciona el lapso de tiempo, habitaciones a construir
+        y lapso de tiempo   **/
     public function crearSimulacion(){
         $registros = Simulacion::all()->toArray();
         Simulacion::destroy($registros);
@@ -21,6 +25,10 @@ class SimulacionController extends Controller{
         Simulacion::create();
         return view('simulacion/nuevo');
     }
+
+    /* en este metodo se guardan la demanda esperada para cada tipo de habitacion,
+        segun la temporada seleccionada
+        y redirecciona al metodo simulacion **/
     public function definirTemporada(Request $request){
         $simulacion = Simulacion::all()->last();
         $demandaEconomica = $this->clientesEconomica($request['temporada']);
@@ -37,6 +45,9 @@ class SimulacionController extends Controller{
         //Cliente::simularClientes($demandaEconomica);
         return redirect()->route('simulacion');
     }
+
+    /* en este metodo se obtine la demanda esperada para cada tipo de habitacion economica,
+        segun la temporada seleccionada   **/
     public function clientesEconomica($temporada){
         $demandaEconomicaPromedio = Demanda::where([
             ['temporada', '=', null],
@@ -60,6 +71,9 @@ class SimulacionController extends Controller{
         $demandaEconomica = (int)round($demandaEconomica, 0, PHP_ROUND_HALF_UP);
         return $demandaEconomica;
     }
+
+    /* en este metodo se obtine la demanda esperada para cada tipo de habitacion negocios,
+       segun la temporada seleccionada   **/
     public function clientesNegocios($temporada){
         $demandaNegociosPromedio = Demanda::where([
             ['temporada', '=', null],
@@ -84,6 +98,8 @@ class SimulacionController extends Controller{
         return $demandaNegocios;
     }
 
+    /* en este metodo se obtine la demanda esperada para cada tipo de habitacion ejecutiva,
+       segun la temporada seleccionada   **/
     public function clientesEjecutiva($temporada){
         $demandaEjecutivaPromedio = Demanda::where([
             ['temporada', '=', null],
@@ -108,6 +124,8 @@ class SimulacionController extends Controller{
         return $demandaEjecutiva;
     }
 
+    /* en este metodo se obtine la demanda esperada para cada tipo de habitacion premium,
+       segun la temporada seleccionada   **/
     public function clientesPremium($temporada){
         $demandaPremiumPromedio = Demanda::where([
             ['temporada', '=', null],
@@ -131,6 +149,11 @@ class SimulacionController extends Controller{
         $demandaPremium = (int)round($demandaPremium, 0, PHP_ROUND_HALF_UP);
         return $demandaPremium;
     }
+
+    /* en este metodo se obtine la demanda esperada para cada tipo de habitacion, lapso de tiempo
+        y cantidad de tiempo y con estos datos se obtiene la demanda total, y se simula los clientes
+        y redirige al metodo tablaSimulacion
+     **/
     public function simulacion(){
         $simulacion=Simulacion::all()->last();
         $demandaEconomica=$simulacion->clientes_simulados_economica;
@@ -155,6 +178,10 @@ class SimulacionController extends Controller{
         }
         return redirect()->route('tablaSimulacion');
     }
+    /* en este metodo se genera la tabla de simulacion: obteniendo los cientes los servicios que pidieron
+       el pago total que se obtine sumando del pago por la habitacion y pago total por los servicios,
+        y retorna el metodo para construir habitacion
+     **/
     public function tablaSimulacion(){
         $registros1 = TablaSimulacion::all()->toArray();
         TablaSimulacion::destroy($registros1);
@@ -183,12 +210,13 @@ class SimulacionController extends Controller{
         //return redirect()->route('datosSimulacion');
         return redirect()->route('construirHabitacion');
     }
+    /* en este metodo se muestra la tabla de simulacion**/
     public function datosSimulacion(){
         $datos=TablaSimulacion::all();
         $habitacionConstruidas=ConstruirHabitacion::all()->last();
        return view('simulacion/simulacion',compact('datos','habitacionConstruidas'));
     }
-
+    /* en este metodo se generan los graficos de la tabla de simulacion**/
     public function crearGraficos(){
         //Count number of services
         $datos = TablaSimulacion::all();
@@ -288,6 +316,7 @@ class SimulacionController extends Controller{
         //dd($servicios);
         return view('simulacion/graficos', compact('servicios'), compact('tipoHabitaciones'));
     }
+    /* en este metodo se generan la ayuda del sistema**/
     public function ayuda(){
         return view('ayuda/ayuda');
     }
