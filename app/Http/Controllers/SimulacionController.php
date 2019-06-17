@@ -328,15 +328,15 @@ class SimulacionController extends Controller{
         foreach ($datos1 as $dato1) {
             $count = 0;
             foreach ($datos as $dato) {
-                
-                if (strpos($dato->servicios, $dato1) !== false ) {
+
+                if (strpos($dato->servicios, $dato1) !== false) {
                     $count++;
                 }
             }
             $servicios[$indice] = [$dato1, $count];
             $indice++;
         }
-        
+
         $countWifi = 0;
         $countTVCable = 0;
         $countLimpieza = 0;
@@ -348,7 +348,7 @@ class SimulacionController extends Controller{
         $countBalneario = 0;
         $countGimnasio = 0;
         //$servicios;
-        
+
         $countEconomico = 0;
         $countEjecutivo = 0;
         $countNegocios = 0;
@@ -357,19 +357,19 @@ class SimulacionController extends Controller{
 
         foreach ($datos as $dato => $value) {
 
-            if ($value->tipo_cliente == 'economica' ) {
+            if ($value->tipo_cliente == 'economica') {
                 $countEconomico++;
-                $tipoHabitaciones[0] = ['Economico', $countEconomico ,"red"];
+                $tipoHabitaciones[0] = ['Economico', $countEconomico, "red"];
             }
-            if ($value->tipo_cliente == 'negocios' ) {
+            if ($value->tipo_cliente == 'negocios') {
                 $countNegocios++;
                 $tipoHabitaciones[1] = ['Negocios', $countNegocios, "blue"];
             }
-            if ($value->tipo_cliente == 'ejecutiva' ) {
+            if ($value->tipo_cliente == 'ejecutiva') {
                 $countEjecutivo++;
                 $tipoHabitaciones[2] = ['Ejecutiva', $countEjecutivo, "gold"];
             }
-            if ($value->tipo_cliente == 'premium' ) {
+            if ($value->tipo_cliente == 'premium') {
                 $countPremium++;
                 $tipoHabitaciones[3] = ['Premium', $countPremium, "green"];
             }
@@ -377,7 +377,7 @@ class SimulacionController extends Controller{
         //dd($servicios);
         $pdf = PDF::loadView('simulacion/graficos', compact('servicios', 'tipoHabitaciones'));
         return $pdf->stream();
-
+    }
     /* en este metodo se generan la ayuda del sistema**/
     public function ayuda(){
         return view('ayuda/ayuda');
