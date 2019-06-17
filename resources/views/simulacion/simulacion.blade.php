@@ -16,6 +16,7 @@
                 <a class="dropdown-item" href="{{route('reportesGraficos')}}">Reporte Grafico</a>
                 <a class="dropdown-item" href="{{route('tablaPDF')}}">Reporte PDF</a>
                 <a class="dropdown-item" href="{{route('reportesPerdidas')}}">Reporte de perdidas</a>
+                <a class="dropdown-item" href="{{route('reportesGananciasPorHabitacion')}}">Reporte ganacias por tipo de habitacion</a>
             </div>
         </div>
         <div class="dropdown mt-2 btn-info"  >

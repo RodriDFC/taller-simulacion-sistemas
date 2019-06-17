@@ -58,6 +58,21 @@ class DemandaController extends Controller
 
     }
 
+    public function reportesGananciasPorHabitacion()
+    {
+        $datosEconomica = TablaSimulacion::all()->where('tipo_cliente', 'economica');
+        $totalGananciaEconomica = $datosEconomica->sum('pago');
+        $datosEjecutiva = TablaSimulacion::all()->where('tipo_cliente', 'ejecutiva');
+        $totalGananciaEjecutiva = $datosEjecutiva->sum('pago');
+        $datosNegocios = TablaSimulacion::all()->where('tipo_cliente', 'negocios');
+        $totalGananciaNegocios = $datosNegocios->sum('pago');
+        $datosPremium = TablaSimulacion::all()->where('tipo_cliente', 'premium');
+        $totalGananciaPremium = $datosPremium->sum('pago');
 
+        $gananciasPorHabitaciones = [$totalGananciaEconomica, $totalGananciaNegocios, $totalGananciaEjecutiva, $totalGananciaPremium];
+        //dd($gananciasPorHabitaciones);
+
+        return view('cliente/ingresosPorHabitacion', compact('datosEconomica', 'datosNegocios', 'datosEjecutiva', 'datosPremium', 'gananciasPorHabitaciones'));
+    }
 
 }
